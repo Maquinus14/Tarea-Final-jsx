@@ -3,9 +3,14 @@ import TaskCard from './TaskCard';
 import { useTasks } from '../context/TaskContext';
 
 const Column = ({ title, status }) => {
-  const { tasks } = useTasks();
+  const { tasks, searchQuery } = useTasks();
 
-  const filteredTasks = tasks.filter(task => task.status === status);
+  const filteredTasks = tasks.filter(task => {
+    return task.status === status && (
+      task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      task.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
 
   return (
     <div className="column">

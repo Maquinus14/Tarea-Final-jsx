@@ -5,13 +5,22 @@ import TaskForm from './components/TaskForm';
 import './App.css';
 
 const KanbanBoard = () => {
-  const { darkMode, toggleTheme } = useTasks();
+  const { darkMode, toggleTheme, searchQuery, setSearchQuery } = useTasks();
 
   return (
     <div className={`app-container ${darkMode ? 'dark-mode' : ''}`}>
       <div className={`app-container ${darkMode ? 'dark-mode' : ''}`}>
         <header className="header-flex">
           <h1>Gestor de Tareas Kanban</h1>
+
+          <input 
+            type="text" 
+            placeholder="Buscar tarea..." 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+
           <button onClick={toggleTheme} className="theme-btn">
             {darkMode ? '☀️ Modo Claro' : '🌙 Modo Oscuro'}
           </button>
