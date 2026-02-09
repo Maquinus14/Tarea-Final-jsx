@@ -1,40 +1,61 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const TaskContext = createContext();
 
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem('kanbanTasks');
+    const savedTasks = localStorage.getItem("kanbanTasks");
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
-  const [darkMode, setDarkMode] = useState(false); 
+  const [darkMode, setDarkMode] = useState(false);
 
   const toggleTheme = () => {
-    setDarkMode(prevMode => !prevMode);
+    setDarkMode((prevMode) => !prevMode);
   };
 
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    localStorage.setItem('kanbanTasks', JSON.stringify(tasks));
+    localStorage.setItem("kanbanTasks", JSON.stringify(tasks));
   }, [tasks]);
 
   const addTask = (newTask) => {
-    setTasks([...tasks, { ...newTask, id: Date.now(), status: 'pending' }]);
+    setTasks([
+      ...tasks,
+      {
+        ...newTask,
+        id: Date.now(),
+        status: "pending",
+        author: newTask.author || "Anónimo",
+      },
+    ]);
   };
 
   const deleteTask = (id) => {
-    setTasks(tasks.filter(task => task.id !== id));
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   const updateTaskStatus = (id, newStatus) => {
-    setTasks(tasks.map(task => 
-      task.id === id ? { ...task, status: newStatus } : task
-    ));
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, status: newStatus } : task,
+      ),
+    );
   };
 
   return (
-    <TaskContext.Provider value={{ tasks, addTask, deleteTask, updateTaskStatus, darkMode, toggleTheme, searchQuery, setSearchQuery}}>
+    <TaskContext.Provider
+      value={{
+        tasks,
+        addTask,
+        deleteTask,
+        updateTaskStatus,
+        darkMode,
+        toggleTheme,
+        searchQuery,
+        setSearchQuery,
+      }}
+    >
       {children}
     </TaskContext.Provider>
   );

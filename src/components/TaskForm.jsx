@@ -1,29 +1,40 @@
-import React from 'react';
-import { useTasks } from '../context/TaskContext';
-import { useForm } from '../hooks/useForm';
+import React from "react";
+import { useTasks } from "../context/TaskContext";
+import { useForm } from "../hooks/useForm";
 
-const TaskForm = () => {
+const TaskForm = ({ userName }) => {
   const { addTask } = useTasks();
 
   const { values, handleChange, resetForm } = useForm({
-    title: '',
-    description: '',
-    priority: 'Media'
+    title: "",
+    description: "",
+    priority: "Media",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!values.title) return;
 
-    addTask(values);
+    addTask({
+      ...values,
+      author: userName,
+    });
+
     resetForm();
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: '20px', padding: '20px', border: '1px solid #ccc' }}>
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        marginBottom: "20px",
+        padding: "20px",
+        border: "1px solid #ccc",
+      }}
+    >
       <h2>Nueva Tarea</h2>
-      
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+
+      <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
         <input
           name="title"
           value={values.title}
@@ -31,7 +42,7 @@ const TaskForm = () => {
           placeholder="Título de la tarea"
           required
         />
-        
+
         <select name="priority" value={values.priority} onChange={handleChange}>
           <option value="Alta">Alta</option>
           <option value="Media">Media</option>
@@ -45,7 +56,7 @@ const TaskForm = () => {
         onChange={handleChange}
         placeholder="Descripción (opcional)"
         rows="3"
-        style={{ width: '100%', marginBottom: '10px' }}
+        style={{ width: "100%", marginBottom: "10px" }}
       />
 
       <button type="submit">Añadir Tarea</button>
