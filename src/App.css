@@ -1,0 +1,176 @@
+/* RESET BÁSICO Y VARIABLES */
+.app-container {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  background-color: #f4f7f6; /* Un gris más moderno y limpio */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ================= HEADER MODERNIZADO ================= */
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  margin-bottom: 30px;
+  border-radius: 0 0 20px 20px; /* Bordes curvos solo abajo */
+}
+
+.header-title-search {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.search-input {
+  padding: 10px 20px;
+  border-radius: 30px; /* Buscador ovalado tipo Google */
+  border: 1px solid #e1e4e8;
+  width: 250px;
+  background-color: #f8f9fa;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.search-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52,152,219,0.2);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid #3498db;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.logout-btn, .theme-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+}
+
+.logout-btn {
+  background: #ff4757;
+  color: white;
+}
+
+.theme-btn {
+  background: #f1f2f6;
+  color: #2f3542;
+  font-size: 1.2rem;
+  padding: 6px 12px;
+}
+
+/* ================= GRID DASHBOARD (El cambio radical) ================= */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 2 tercios izquierda, 1 tercio derecha */
+  gap: 30px;
+  padding: 0 40px 40px 40px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.active-zone {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.sidebar-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* ================= COLUMNAS Y PANELES ================= */
+.column-wrapper, .action-panel {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+}
+
+.action-panel {
+  border-top: 5px solid #3498db;
+}
+
+.completed-wrapper {
+  opacity: 0.8; /* Le da un efecto visual de "terminado" */
+  flex-grow: 1;
+}
+
+h2 {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #e1e4e8; /* Línea punteada en vez de sólida */
+}
+
+/* Quitar los estilos feos del componente Column interior si los tuviera */
+.column {
+  background: transparent !important;
+  padding: 0 !important;
+  min-height: auto !important;
+  border: none !important;
+}
+
+/* ================= MODO OSCURO ================= */
+.app-container.dark-mode {
+  background-color: #121418;
+  color: #e0e0e0;
+}
+
+.dark-mode .header-flex,
+.dark-mode .column-wrapper,
+.dark-mode .action-panel {
+  background-color: #1e2126;
+  border: 1px solid #2f3542;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.dark-mode h1, 
+.dark-mode .user-name {
+  color: #f1f2f6;
+}
+
+.dark-mode h2 {
+  color: #a4b0be;
+  border-bottom-color: #2f3542;
+}
+
+.dark-mode .search-input {
+  background-color: #121418;
+  border-color: #2f3542;
+  color: white;
+}
+
+.dark-mode .theme-btn {
+  background: #2f3542;
+}
