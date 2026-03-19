@@ -7,18 +7,17 @@ import "./App.css";
 
 const KanbanBoard = () => {
   const { darkMode, toggleTheme, searchQuery, setSearchQuery } = useTasks();
-
   const { user, logout, handleGoogleSuccess } = useAuth();
 
   useEffect(() => {
     if (window.google && !user) {
-      google.accounts.id.initialize({
+      window.google.accounts.id.initialize({
         client_id:
           "409586548058-s1s00u1uftsrikopg2okuv4uil3ha64s.apps.googleusercontent.com",
         callback: handleGoogleSuccess,
       });
-      google.accounts.id.prompt();
-      google.accounts.id.renderButton(document.getElementById("googleBtn"), {
+      window.google.accounts.id.prompt();
+      window.google.accounts.id.renderButton(document.getElementById("googleBtn"), {
         theme: "outline",
         size: "large",
       });
@@ -42,7 +41,7 @@ const KanbanBoard = () => {
     );
   }
 
- return (
+  return (
     <div className={`app-container ${darkMode ? "dark-mode" : ""}`}>
       {/* 1. Cabecera modernizada */}
       <header className="header-flex">
